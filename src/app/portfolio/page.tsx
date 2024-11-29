@@ -1,21 +1,31 @@
+import fs from 'fs';
+import path from 'path';
 import Link from 'next/link';
-import Layout from '../components/layout';
+import Layout from '@/app/components/layout';
 
-const Portfolio = () => {
-  const projects = [
-    { id: 'project1', title: 'Project 1' },
-    { id: 'project2', title: 'Project 2' },
-    { id: 'project3', title: 'Project 3' },
-  ];
+export const revalidate = 60; // Revalidate every 60 seconds
+
+export async function getStatic() {
+  const dirPath = path.join(process.cwd(), 'src/app/portfolio');
+  const files = await fs.promises.readdir(dirPath);
+  const directories = files.filter((file) => fs.statSync(path.join(dirPath, file)).isDirectory());
+
+  return {
+    directories
+  };
+}
+
+const Portfolio = async () => {
+  const { directories } = await getStatic();
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold">My Portfolio</h1>
+      <h1 className="text-2xl font-bold">Portfolio</h1>
       <ul>
-        {projects.map((project) => (
-          <li key={project.id}>
-            <Link href={`/portfolio/${project.id}`} legacyBehavior>
-              <a className="text-blue-500">{project.title}</a>
+        {directories.map((dir) => (
+          <li key={dir}>
+            <Link href={`/portfolio/${dir}`} className="text-blue-500 hover:underline">
+              {dir}
             </Link>
           </li>
         ))}

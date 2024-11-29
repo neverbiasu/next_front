@@ -1,4 +1,6 @@
-import Image from "next/image";
+'use client';
+
+import Image from 'next/image';
 import Layout from './components/layout';
 
 export default function Home() {
@@ -15,9 +17,7 @@ export default function Home() {
             priority
           />
           <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-            <li className="mb-2">
-              This is a nextjs front-end training page.
-            </li>
+            <li className="mb-2">This is a nextjs front-end training page.</li>
             <li>Save and see your changes instantly.</li>
           </ol>
 
@@ -54,13 +54,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              aria-hidden
-              src="/file.svg"
-              alt="File icon"
-              width={16}
-              height={16}
-            />
+            <Image aria-hidden src="/file.svg" alt="File icon" width={16} height={16} />
             Learn
           </a>
           <a
@@ -69,13 +63,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              aria-hidden
-              src="/window.svg"
-              alt="Window icon"
-              width={16}
-              height={16}
-            />
+            <Image aria-hidden src="/window.svg" alt="Window icon" width={16} height={16} />
             Examples
           </a>
           <a
@@ -84,13 +72,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              aria-hidden
-              src="/globe.svg"
-              alt="Globe icon"
-              width={16}
-              height={16}
-            />
+            <Image aria-hidden src="/globe.svg" alt="Globe icon" width={16} height={16} />
             Go to nextjs.org →
           </a>
         </footer>
