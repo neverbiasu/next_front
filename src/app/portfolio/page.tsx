@@ -5,18 +5,20 @@ import Layout from '@/app/components/layout';
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
-export async function getStatic() {
+export async function generateStaticParams() {
   const dirPath = path.join(process.cwd(), 'src/app/portfolio');
   const files = await fs.promises.readdir(dirPath);
   const directories = files.filter((file) => fs.statSync(path.join(dirPath, file)).isDirectory());
 
-  return {
-    directories
-  };
+  return directories.map((dir) => ({
+    dir
+  }));
 }
 
 const Portfolio = async () => {
-  const { directories } = await getStatic();
+  const dirPath = path.join(process.cwd(), 'src/app/portfolio');
+  const files = await fs.promises.readdir(dirPath);
+  const directories = files.filter((file) => fs.statSync(path.join(dirPath, file)).isDirectory());
 
   return (
     <Layout>
