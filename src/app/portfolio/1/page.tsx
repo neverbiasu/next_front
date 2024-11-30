@@ -3,16 +3,25 @@
 import { useState } from 'react';
 import Layout from '@/app/layout';
 
+interface Checkbox {
+  id: number;
+  checked: boolean;
+  value: string;
+  order: number;
+}
+
 const GoingOutChecklist = () => {
-  const [checkboxes, setCheckboxes] = useState([{ id: 1, checked: false, value: '' }]);
+  const [checkboxes, setCheckboxes] = useState<Checkbox[]>([]);
   const [inputValue, setInputValue] = useState('');
 
   const addCheckbox = () => {
-    setCheckboxes([
-      ...checkboxes,
-      { id: checkboxes.length + 1, checked: false, value: inputValue }
-    ]);
-    setInputValue('');
+    if (inputValue.trim() !== '') {
+      setCheckboxes([
+        ...checkboxes,
+        { id: checkboxes.length + 1, checked: false, value: inputValue, order: checkboxes.length }
+      ]);
+      setInputValue('');
+    }
   };
 
   const removeCheckbox = (id: number) => {
@@ -20,17 +29,23 @@ const GoingOutChecklist = () => {
   };
 
   const toggleCheckbox = (id: number) => {
-    setCheckboxes(
-      checkboxes.map((checkbox) =>
-        checkbox.id === id ? { ...checkbox, checked: !checkbox.checked } : checkbox
-      )
+    const updatedCheckboxes = checkboxes.map((checkbox) =>
+      checkbox.id === id ? { ...checkbox, checked: !checkbox.checked } : checkbox
     );
+    // 将已确认的任务沉到最底部，取消确认的任务回到原来的位置
+    updatedCheckboxes.sort((a, b) => {
+      if (a.checked === b.checked) {
+        return a.order - b.order;
+      }
+      return Number(a.checked) - Number(b.checked);
+    });
+    setCheckboxes(updatedCheckboxes);
   };
 
   return (
     <Layout>
       <h1 className="text-center text-2xl text-white mb-5">Going Out Checklist</h1>
-      <div className="items-center">
+      <div className="flex flex-col items-center">
         <div className="flex mb-5 items-center justify-center">
           <input
             type="text"
@@ -46,28 +61,32 @@ const GoingOutChecklist = () => {
             Add it!
           </button>
         </div>
-        {checkboxes.map((checkbox) => (
-          <div
-            key={checkbox.id}
-            className="flex items-center mb-2 justify-between p-2 rounded border border-gray-300 bg-gray-100 w-full max-w-2xl mx-auto"
-          >
-            <input
-              type="checkbox"
-              checked={checkbox.checked}
-              onChange={() => toggleCheckbox(checkbox.id)}
-              className="w-6 h-6 mr-2 flex-shrink-0 cursor-pointer transition-transform hover:scale-110"
-            />
-            <span className="flex-grow text-stone-800 text-center mx-5 break-words">
-              {checkbox.value}
-            </span>
-            <button
-              onClick={() => removeCheckbox(checkbox.id)}
-              className="p-1 text-sm rounded border-none bg-red-500 text-white cursor-pointer flex-shrink-0"
+        <div className="w-full max-w-2xl p-4 rounded border border-gray-300 bg-gradient-to-r from-blue-100 to-blue-200">
+          {checkboxes.map((checkbox) => (
+            <div
+              key={checkbox.id}
+              className={`flex items-center mb-2 justify-between p-2 rounded border border-gray-300 bg-gray-100 transition-all duration-300 ease-in-out transform ${checkbox.checked ? 'order-last' : ''}`}
             >
-              Remove
-            </button>
-          </div>
-        ))}
+              <input
+                type="checkbox"
+                checked={checkbox.checked}
+                onChange={() => toggleCheckbox(checkbox.id)}
+                className="w-6 h-6 mr-2 flex-shrink-0 cursor-pointer transition-transform hover:scale-110"
+              />
+              <span
+                className={`flex-grow text-stone-800 text-left mx-5 break-words ${checkbox.checked ? 'line-through' : ''}`}
+              >
+                {checkbox.value}
+              </span>
+              <button
+                onClick={() => removeCheckbox(checkbox.id)}
+                className="p-1 text-sm rounded border-none bg-red-500 text-white cursor-pointer flex-shrink-0"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </Layout>
   );
