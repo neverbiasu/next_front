@@ -53,7 +53,7 @@ const Baidu = () => {
           </div>
         </div>
         <div className="flex flex-col md:flex-row mt-8 justify-center space-y-4 md:space-y-0 md:space-x-8">
-          <div className="flex flex-row">
+          <div className="flex flex-row mr-[460px]">
             <a
               href="https://top.baidu.com/board?platform=pc&sa=pcindex_entry"
               className="flex flex-row text-blue-700 underline"
@@ -70,7 +70,7 @@ const Baidu = () => {
           </div>
         </div>
         <div className="flex flex-col md:flex-row mt-8 justify-center space-y-4 md:space-y-0 md:space-x-8">
-          <ul className="space-y-2">
+          <ul className="space-y-2 mr-14">
             <li className="flex justify-between text-gray-600">
               <span>🔝 中国更希望百花齐放</span>
               <span className="text-red-500">热</span>
