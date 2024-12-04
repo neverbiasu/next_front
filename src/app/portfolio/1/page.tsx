@@ -10,8 +10,21 @@ interface Checkbox {
   order: number;
 }
 
+const defaultCheckboxes: Checkbox[] = [
+  { id: 1, checked: false, value: 'Phycics Lab Report', order: 0 },
+  { id: 2, checked: false, value: 'Unity Gane plan', order: 1 },
+  { id: 3, checked: false, value: 'Comment Gane physics', order: 2 },
+  { id: 4, checked: false, value: 'Document Tec Share Unity (Billboarod)', order: 3 },
+  { id: 5, checked: false, value: 'Reading in Englsh', order: 4 },
+  { id: 6, checked: false, value: 'Leoture of Sound and Fury Essay', order: 5 },
+  { id: 7, checked: false, value: 'Madame Bovary Essay', order: 6 },
+  { id: 8, checked: false, value: 'Xin Jin Ping', order: 7 },
+  { id: 9, checked: false, value: 'Unit 4 ext Summary', order: 8 },
+  { id: 10, checked: false, value: '3DMAX homework turn in', order: 9 }
+];
+
 const GoingOutChecklist = () => {
-  const [checkboxes, setCheckboxes] = useState<Checkbox[]>([]);
+  const [checkboxes, setCheckboxes] = useState<Checkbox[]>(defaultCheckboxes);
   const [inputValue, setInputValue] = useState('');
 
   const addCheckbox = () => {
@@ -64,7 +77,7 @@ const GoingOutChecklist = () => {
           {checkboxes.map((checkbox) => (
             <div
               key={checkbox.id}
-              className={`flex items-center mb-2 justify-between p-2 rounded border transition-all duration-300 ease-in-out transform ${checkbox.checked ? 'order-last' : ''} bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600`}
+              className={`flex items-center mb-2 justify-between p-2 rounded border transition-all duration-300 ease-in-out transform ${checkbox.checked ? 'order-last bg-tropical-indigo dark:bg-tropical-indigo' : 'bg-gray-100 dark:bg-gray-700'} border-gray-300 dark:border-gray-600`}
             >
               <input
                 type="checkbox"
