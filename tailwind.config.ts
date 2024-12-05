@@ -13,7 +13,8 @@ export default {
         foreground: 'var(--foreground)'
       },
       backgroundColor: {
-        'baidu-blue': '#4e6ef2'
+        'baidu-blue': '#4e6ef2',
+        'tropical-indigo': '#9683EC'
       },
       borderColor: {
         'baidu-blue': '#4e6ef2',
