@@ -14,9 +14,11 @@ const geistMono = localFont({
 });
 
 export default function RootLayout({
-  children
+  children,
+  fullWidth = false
 }: Readonly<{
   children: React.ReactNode;
+  fullWidth?: boolean;
 }>) {
   return (
     <html lang="en">
@@ -30,7 +32,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <Navbar />
-        <main className="container mx-auto p-4">{children}</main>
+        <main className={fullWidth ? '' : 'container mx-auto'}>{children}</main>
       </body>
     </html>
   );
