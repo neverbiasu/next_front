@@ -1,11 +1,11 @@
 'use client';
 
-import Layout from '@/app/layout';
+import PageLayout from '@/app/components/page_layout';
 import Image from 'next/image';
 
 const Github404 = () => {
   return (
-    <Layout fullWidth>
+    <PageLayout fullWidth>
       <div className="relative flex flex-col w-full h-screen">
         <div className="absolute inset-0 w-[100%] h-[425px] z-0">
           <Image
@@ -112,7 +112,7 @@ const Github404 = () => {
           </a>
         </div>
       </div>
-    </Layout>
+    </PageLayout>
   );
 };
 
