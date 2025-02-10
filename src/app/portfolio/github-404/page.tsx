@@ -82,7 +82,7 @@ const Github404 = () => {
             <input
               type="submit"
               value="Search"
-              className="h-10 w-[90px] text-sm ml-1 mb-1 text-black font-bold bg-github-gray-2 border rounded-sm shadow-sm border-github-gray-1"
+              className="h-10 w-[90px] text-sm mt-auto ml-1 mb-auto text-black font-bold bg-github-gray-2 border rounded-sm shadow-sm border-github-gray-1"
             ></input>
           </form>
           <div className="mt-8 text-github-gray-0">
